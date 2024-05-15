@@ -1,29 +1,23 @@
-const express = require ('express');
-const conectarBD = require ('../config/db');
-const cors = require ('cors');
+const express = require('express');
+const conectarBD = require('../config/db');
+const cors = require('cors');
 
-
-// COnfiguracion express y puerto
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+
+// Habilitar CORS antes de definir las rutas
+app.use(cors());
 app.use(express.json());
 
-// rutas de los modulos
+// Rutas de los módulos
 app.use('/apli/clientes', require('../routes/routescliente'));
 app.use('/apli/productos', require('../routes/routesproducto'));
 
-// Enlazamos coneccion base de datos 
+// Enlazamos conexión base de datos
 conectarBD();
-app.use(cors());
 
-
-
-
-
-
-
-app.listen(port, () => console.log("El servidor se conectó", port))
+app.listen(port, () => console.log("El servidor se conectó", port));
 
 app.get('/', (req, res) => {
-    res.send("Bienvenido, el servidor esta configurado")
+    res.send("Bienvenido, el servidor está configurado");
 });

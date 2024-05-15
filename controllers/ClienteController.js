@@ -66,13 +66,13 @@ exports.eliminarClientes = async (req, res) => {
 
 exports.modificarCliente = async (req, res) => {
     try {
-        const cliente = await Cliente.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        res.json({msg: 'Se ha modificado el cliente'});
-        if(!cliente) {
+        const cliente = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!cliente) {
             return res.status(404).send('Cliente no encontrado');
-        } res.json(cliente)
+        }
+        res.json(cliente);
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Hubo un error al modificar el cliente')
+        console.log(error);
+        res.status(500).send('Hubo un error al modificar el cliente');
     }
-}
+};

@@ -64,13 +64,13 @@ exports.eliminarProductos = async (req, res) => {
 
 exports.modificarProducto = async (req, res) => {
     try {
-        const producto = await Producto.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        res.json({msg: 'Se ha modificado el producto'});
-        if(!producto) {
+        const producto = await Producto.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!producto) {
             return res.status(404).send('Producto no encontrado');
-        } res.json(producto)
+        }
+        res.json({ msg: 'Se ha modificado el producto', producto });
     } catch (error) {
-        console.log(error)
-        res.status(500).send('Hubo un error al modificar el producto')
+        console.log(error);
+        res.status(500).send('Hubo un error al modificar el producto');
     }
 };
